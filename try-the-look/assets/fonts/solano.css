@@ -1,0 +1,8 @@
+/* Solano Gothic MVB (MVB Fonts): the Texas Ranchers headline face, subset to Latin and converted to WOFF2 from the
+   club's installed desktop files. Licensed font: these files stay out of any public repo or site until the club
+   confirms its licence covers web use on that site. Without them the stack falls back to Barlow Condensed. */
+@font-face { font-family: "Solano Gothic MVB"; src: url("solano-gothic-mvb-300.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Solano Gothic MVB"; src: url("solano-gothic-mvb-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Solano Gothic MVB"; src: url("solano-gothic-mvb-500.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Solano Gothic MVB"; src: url("solano-gothic-mvb-600.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Solano Gothic MVB"; src: url("solano-gothic-mvb-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
