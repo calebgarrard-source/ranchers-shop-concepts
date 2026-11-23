@@ -78,7 +78,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-
 .ath { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
 .ath img { position: absolute; left: 50%; margin-left: calc(-581 * var(--u)); top: calc(92 * var(--u)); width: calc(1161 * var(--u)); height: auto; max-width: none; transform-origin: 50% 0; display: block; }
 .h1 { position: absolute; left: 0; right: 0; top: calc(100 * var(--u)); z-index: 4; margin: 0; text-align: center; font-size: calc(84 * var(--u)); color: var(--navy); }
-.h1 .st, .mtitle .st { font-weight: 300; }
+/* Brand pass 2 (Caleb: "I don't like the font of the word rally... do something a bit more on brand"): no stencil cut
+   anywhere. Headline words are solid Solano Bold like the rest of the headline; the marquee rows keep their weight. */
+.st, .st.nc { -webkit-mask-image: none; mask-image: none; }
 .ctas { position: absolute; left: 0; right: 0; top: calc(270 * var(--u)); z-index: 4; display: flex; justify-content: center; gap: calc(8 * var(--u)); }
 .btn { display: inline-flex; align-items: center; justify-content: center; height: calc(44 * var(--u)); padding: 0 calc(22 * var(--u)); border-radius: 0; font-size: calc(11.5 * var(--u)); letter-spacing: .12em; white-space: nowrap; transition: background-color .2s, color .2s; }
 .btn-primary { background: var(--red); color: var(--white); }
@@ -222,7 +224,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-
       <line x1="704" y1="610" x2="1408" y2="300"/><line x1="704" y1="610" x2="1408" y2="470"/><line x1="704" y1="610" x2="1318" y2="924"/>
     </svg>
     <div class="ath"><img src="assets/hero.webp" width="1910" height="2560" alt="Ranchers Sweat Drippin Hat in navy floating above the Unisex Offseason Windbreaker" fetchpriority="high"></div>
-    <h1 class="h1 head wipe" aria-label="Ride tall every season, every rally!"><span class="ln l1" aria-hidden="true"><span class="ch">R</span><span class="ch">I</span><span class="ch">D</span><span class="ch">E</span><span class="ch"> </span><span class="ch">T</span><span class="ch">A</span><span class="ch">L</span><span class="ch">L</span><span class="ch"> </span><span class="ch">E</span><span class="ch">V</span><span class="ch">E</span><span class="ch">R</span><span class="ch">Y</span><span class="ch"> </span><span class="ch">S</span><span class="ch">E</span><span class="ch">A</span><span class="ch">S</span><span class="ch">O</span><span class="ch">N</span></span><span class="ln l2" aria-hidden="true"><span class="ch">E</span><span class="ch">V</span><span class="ch">E</span><span class="ch">R</span><span class="ch">Y</span><span class="ch"> </span><span class="ch st" style="--d:90deg;--c:36%">R</span><span class="ch st" style="--d:180deg;--c:62.3%">A</span><span class="ch st" style="--d:90deg;--c:48.9%">L</span><span class="ch st" style="--d:90deg;--c:48.9%">L</span><span class="ch st" style="--d:180deg;--c:38.2%">Y</span><span class="ch st nc">!</span></span></h1>
+    <h1 class="h1 head wipe" aria-label="Ride tall every season, every rally."><span class="ln l1" aria-hidden="true"><span class="ch">R</span><span class="ch">I</span><span class="ch">D</span><span class="ch">E</span><span class="ch"> </span><span class="ch">T</span><span class="ch">A</span><span class="ch">L</span><span class="ch">L</span><span class="ch"> </span><span class="ch">E</span><span class="ch">V</span><span class="ch">E</span><span class="ch">R</span><span class="ch">Y</span><span class="ch"> </span><span class="ch">S</span><span class="ch">E</span><span class="ch">A</span><span class="ch">S</span><span class="ch">O</span><span class="ch">N</span></span><span class="ln l2" aria-hidden="true"><span class="ch">E</span><span class="ch">V</span><span class="ch">E</span><span class="ch">R</span><span class="ch">Y</span><span class="ch"> </span><span class="ch st" style="--d:90deg;--c:36%">R</span><span class="ch st" style="--d:180deg;--c:62.3%">A</span><span class="ch st" style="--d:90deg;--c:48.9%">L</span><span class="ch st" style="--d:90deg;--c:48.9%">L</span><span class="ch st" style="--d:180deg;--c:38.2%">Y</span><span class="ch st nc">.</span></span></h1>
     <div class="ctas hua"><a class="btn btn-primary" href="https://shop.ranchers.com/products/lil-wayne-windbreaker-jacket" target="_blank" rel="noopener">Shop now</a><a class="btn btn-secondary" href="https://shop.ranchers.com/collections/all-products" target="_blank" rel="noopener">Explore all</a></div>
     <div class="avs hua">
       <a class="av" href="https://shop.ranchers.com/products/atx-hat" target="_blank" rel="noopener" aria-label="ATX Hat" data-img="assets/avatar-1.webp" data-size="128,128"></a><a class="av" href="https://shop.ranchers.com/products/ponytail-hat" target="_blank" rel="noopener" aria-label="Women's Ponytail Hat, Navy" data-img="assets/avatar-2.webp" data-size="128,128"></a><a class="av" href="https://shop.ranchers.com/products/trucker-hat-copy" target="_blank" rel="noopener" aria-label="Blue Retro Trucker" data-img="assets/avatar-3.webp" data-size="128,128"></a>
@@ -595,7 +597,7 @@ window.stencilCut = (function () {
     const end2 = wipe(l2, 1570, 40);
     setTimeout(backspace, end2 + 150);
   }
-  // once: hide RALLY! back to its first three letters at 45 ms per letter, hold 450 ms, retype at 50 ms per letter
+  // once: hide RALLY. back to its first three letters at 45 ms per letter, hold 450 ms, retype at 50 ms per letter
   function backspace() {
     const gone = stencilWord.slice(3).reverse();
     gone.forEach((s, i) => setTimeout(() => { s.style.visibility = 'hidden'; }, i * 45));
