@@ -13,6 +13,6 @@ Three homepage concepts for [shop.ranchers.com](https://shop.ranchers.com), buil
 Notes for testers:
 - Product links open the real product pages. The Try the Look bag is a shortlist stored in your browser; no order or payment happens here.
 - The Rail scales as one picture, so it reads best on a laptop or larger.
-- Body and label type (Sweet Sans Pro, Sweet Square Pro) loads from the club's Adobe Fonts kit and shows once this site's domain is allowed in that kit; until then a close stand-in appears. Headlines use Solano Gothic MVB, used under the club's web licence.
+- Type is the club's own: headlines in Solano Gothic MVB (used under the club's web licence), labels and body in Sweet Square Pro and Sweet Sans Pro from the club's Adobe Fonts kit.
 
 #RideTall
