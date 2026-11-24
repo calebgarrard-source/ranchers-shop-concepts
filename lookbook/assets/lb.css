@@ -193,6 +193,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .legal a { text-decoration: none; }
 .legal a:hover { color: var(--bone); text-decoration: underline; text-underline-offset: 3px; }
 .legal .sign { font-family: var(--f-head); font-weight: 700; font-size: 20px; color: var(--bone); letter-spacing: .02em; }
+.legal .sign-callout { font-size: 24px; text-transform: none; letter-spacing: .01em; }
 @media (max-width: 899.98px) {
   .ftr-in { grid-template-columns: 1fr; gap: 40px; padding-top: 56px; }
   .cols { grid-template-columns: 1fr; gap: 0; }
