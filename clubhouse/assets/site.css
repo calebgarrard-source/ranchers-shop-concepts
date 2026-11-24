@@ -132,6 +132,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .hero--stack .hero-in { position: relative; left: auto; right: auto; bottom: auto; margin-top: -26px; padding: 0 var(--gut); }
   .hero--stack .fcard { position: relative; left: auto; right: auto; bottom: auto; margin: 18px var(--gut) 0; }
   .hero--stack .hero-scroll { position: relative; left: auto; bottom: auto; margin: 8px var(--gut) 14px; }
+  .hero-rot .slides { position: relative; inset: auto; display: grid; }
+  .hero-rot .slide { position: relative; inset: auto; grid-area: 1 / 1; }
+  .hero-rot .hero-media { aspect-ratio: 11 / 10; }
+  .hero-rot .hero-in { bottom: auto; }
+  .hero-ctl { position: relative; left: auto; bottom: auto; padding: 6px var(--gut) 16px; }
+  .hero-rot .hero-ctl .hero-scroll { margin: 0 0 0 auto; }
   .hero-in { right: var(--gut); max-width: none; bottom: 128px; }
   .hero-h { font-size: clamp(44px, 13vw, 58px); }
   .hero-callout { font-size: 20px; color: var(--white); margin-bottom: 12px; }
@@ -141,6 +147,29 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .fc-img, .fc-txt { display: none; }
   .fc-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; letter-spacing: .12em; }
 }
+
+/* rotating hero: one piece per slide, crossfading; arrows, ticks and pause bottom left; only the shown slide is reachable */
+.hero-rot .slide { opacity: 0; transition: opacity 700ms var(--ease); }
+.hero-rot .slide.is-active { opacity: 1; z-index: 1; }
+@media (min-width: 768px) {
+  .hero-rot .slides { position: absolute; inset: 0; }
+  .hero-rot .slide { position: absolute; inset: 0; }
+  .hero-rot .hero-in { bottom: 100px; }
+  .hero-ctl { position: absolute; z-index: 3; left: var(--gut); bottom: 28px; }
+}
+.hero-ctl { display: flex; align-items: center; gap: 8px; color: var(--bone); }
+.hc-arr, .hc-pause { width: 38px; height: 38px; display: grid; place-items: center; border: 1.5px solid rgba(231, 228, 221, .7); color: var(--bone);
+                     transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease); }
+.hc-arr:hover, .hc-pause:hover { background: var(--bone); color: var(--navy); }
+.hc-ticks { display: flex; gap: 2px; margin: 0 4px; }
+.hc-tick { position: relative; width: 34px; height: 38px; }
+.hc-tick span { position: absolute; left: 4px; right: 4px; top: 18px; height: 2px; background: rgba(231, 228, 221, .42); }
+.hc-tick[aria-current="true"] span { top: 17px; height: 3px; background: var(--bone); }
+.hc-pause span { display: grid; place-items: center; }
+.hc-pause .i-play, .hero-rot.is-user-paused .hc-pause .i-pause { display: none; }
+.hero-rot.is-user-paused .hc-pause .i-play { display: grid; }
+.hero-ctl .hero-scroll { position: static; margin-left: 14px; }
+html.rm .hc-pause { display: none; }
 
 /* shelves: section header with square arrows, a track that swipes on phone */
 .shelf { padding-top: clamp(56px, 6.4vw, 96px); }

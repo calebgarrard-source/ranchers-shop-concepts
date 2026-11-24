@@ -8,6 +8,7 @@
   function $$(s, r) { return Array.prototype.slice.call((r || d).querySelectorAll(s)); }
   var mq = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : null;
   function rm() { return !!(mq && mq.matches); }
+  function reducedNow() { return !!(mq && mq.matches); }
   function syncRm() { h.classList.toggle('rm', rm()); }
   syncRm();
   if (mq) { if (mq.addEventListener) mq.addEventListener('change', syncRm); else if (mq.addListener) mq.addListener(syncRm); }
@@ -42,6 +43,49 @@
     menuBtn.addEventListener('click', open);
     $$('[data-close]', drawer).forEach(function (b) { b.addEventListener('click', close); });
     d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer.classList.contains('open')) close(); });
+  }
+
+  /* rotating hero: autoplay every data-interval ms with a crossfade; pauses on hover, on focus, when the tab is hidden,
+     when the hero is off screen and on the pause button; reduced motion = no autoplay. Only the shown slide is reachable
+     (inert on the others). Slides after the first load their images after the page has loaded (or when shown). */
+  var rot = $('.hero-rot');
+  if (rot) {
+    var slides = $$('.slide', rot), ticks = $$('.hc-tick', rot), pbtn = $('.hc-pause', rot), live = $('.slides', rot);
+    var iv = Number(rot.getAttribute('data-interval')) || 5000, curS = 0, timer = 0;
+    var st = { hover: false, focus: false, hidden: !!d.hidden, off: false, user: false };
+    var loadSlide = function (s) {
+      $$('[data-srcset]', s).forEach(function (el) { el.setAttribute('srcset', el.getAttribute('data-srcset')); el.removeAttribute('data-srcset'); });
+      $$('img[data-src]', s).forEach(function (el) { el.setAttribute('src', el.getAttribute('data-src')); el.removeAttribute('data-src'); });
+    };
+    var isPaused = function () { return st.hover || st.focus || st.hidden || st.off || st.user || reducedNow(); };
+    var sync = function () {
+      var p = isPaused();
+      rot.classList.toggle('is-paused', p); rot.classList.toggle('is-user-paused', st.user);
+      if (pbtn) pbtn.setAttribute('aria-label', st.user ? 'Play slideshow' : 'Pause slideshow');
+      if (live) live.setAttribute('aria-live', p ? 'polite' : 'off');
+      clearTimeout(timer);
+      if (!p) timer = setTimeout(function () { go(curS + 1); }, iv);
+    };
+    var go = function (i) {
+      i = (i + slides.length) % slides.length;
+      loadSlide(slides[i]);
+      slides.forEach(function (s, k) { var on = k === i; s.classList.toggle('is-active', on); if (on) s.removeAttribute('inert'); else s.setAttribute('inert', ''); });
+      ticks.forEach(function (t, k) { if (k === i) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current'); });
+      curS = i; loadSlide(slides[(i + 1) % slides.length]); sync();
+    };
+    $$('.hc-arr', rot).forEach(function (b) { b.addEventListener('click', function () { go(curS + Number(b.getAttribute('data-dir'))); }); });
+    ticks.forEach(function (t, k) { t.addEventListener('click', function () { go(k); }); });
+    if (pbtn) pbtn.addEventListener('click', function () { st.user = !st.user; sync(); });
+    rot.addEventListener('pointerenter', function (e) { if (e.pointerType !== 'touch') { st.hover = true; sync(); } });
+    rot.addEventListener('pointerleave', function () { st.hover = false; sync(); });
+    rot.addEventListener('focusin', function () { st.focus = true; sync(); });
+    rot.addEventListener('focusout', function (e) { if (!e.relatedTarget || !rot.contains(e.relatedTarget)) { st.focus = false; sync(); } });
+    d.addEventListener('visibilitychange', function () { st.hidden = !!d.hidden; sync(); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { st.off = !es[0].isIntersecting; sync(); }, { threshold: 0.25 }).observe(rot);
+    var later = function () { setTimeout(function () { slides.forEach(loadSlide); }, 600); };
+    if (d.readyState === 'complete') later(); else window.addEventListener('load', later);
+    if (mq) { if (mq.addEventListener) mq.addEventListener('change', sync); else if (mq.addListener) mq.addListener(sync); }
+    sync();
   }
 
   /* shelves: arrows step one card; the track itself swipes and scroll-snaps */
