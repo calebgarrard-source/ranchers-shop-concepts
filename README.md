@@ -1,6 +1,6 @@
 # Texas Ranchers shop concepts
 
-Five homepage concepts for [shop.ranchers.com](https://shop.ranchers.com), each with its own landing pages for the holiday ads. Everything is built from renders of the real merch with the club's marks, type and textures. These are test pages only: nothing on the live store has changed.
+Six homepage concepts for [shop.ranchers.com](https://shop.ranchers.com), each with its own landing pages for the holiday ads. Everything is built from renders of the real merch with the club's marks, type and textures. These are test pages only: nothing on the live store has changed.
 
 **Live pages:** https://calebgarrard-source.github.io/ranchers-shop-concepts/
 
@@ -11,6 +11,7 @@ Five homepage concepts for [shop.ranchers.com](https://shop.ranchers.com), each 
 | The Rail | https://calebgarrard-source.github.io/ranchers-shop-concepts/the-rail/ | Hover along the rail, click a top, use the arrows or keyboard (desktop) |
 | Lookbook | https://calebgarrard-source.github.io/ranchers-shop-concepts/lookbook/ | The hero slides and arrows, the lineup carousel, shop by category and color |
 | Collections | https://calebgarrard-source.github.io/ranchers-shop-concepts/collections/ | The men's and women's tabs, the detail bands, the category tiles |
+| Clubhouse | https://calebgarrard-source.github.io/ranchers-shop-concepts/clubhouse/ | The hero cards, render cards that turn on hover, and a product page for every item with five angles and a 360 per color |
 
 ## Ad landing pages
 
