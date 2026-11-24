@@ -58,7 +58,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-
 /* hidden until animated (only with JS and motion) */
 .js:not(.rm) .hua { opacity: 0; }
 .js:not(.rm) .wipe .ch { clip-path: inset(0 0 100% 0); opacity: 0; }
-.js:not(.rm) .ath img { opacity: 0; }
+.js:not(.rm) .fig.intro { opacity: 0; }
 .js:not(.rm) .c-mid .photo { visibility: hidden; }
 
 /* ---------- hero ---------- */
@@ -76,7 +76,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-
 .rays { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; display: block; pointer-events: none; }
 .rays line { stroke: var(--page); stroke-width: 1.1px; vector-effect: non-scaling-stroke; }
 .ath { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
-.ath img { position: absolute; left: 50%; margin-left: calc(-581 * var(--u)); top: calc(92 * var(--u)); width: calc(1161 * var(--u)); height: auto; max-width: none; transform-origin: 50% 0; display: block; }
+.fig { position: absolute; left: 50%; margin-left: calc(-581 * var(--u)); top: calc(92 * var(--u)); width: calc(1161 * var(--u)); height: auto; max-width: none; transform-origin: 50% 0; display: block; opacity: 0; }
+.fig.on { opacity: 1; }
+/* hover target over the figure (the figure itself ignores the pointer) */
+.fig-zone { position: absolute; left: 50%; width: calc(640 * var(--u)); margin-left: calc(-320 * var(--u)); top: calc(324 * var(--u)); bottom: 0; z-index: 3; }
 .h1 { position: absolute; left: 0; right: 0; top: calc(100 * var(--u)); z-index: 4; margin: 0; text-align: center; font-size: calc(84 * var(--u)); color: var(--navy); }
 /* Brand pass 2 (Caleb: "I don't like the font of the word rally... do something a bit more on brand"): no stencil cut
    anywhere. Headline words are solid Solano Bold like the rest of the headline; the marquee rows keep their weight. */
@@ -89,7 +92,18 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-
 .btn-secondary:hover { background: var(--navy); color: var(--bone); }
 .avs { position: absolute; left: calc(40 * var(--uw)); top: calc(578 * var(--u)); z-index: 4; display: flex; }
 .av { display: block; width: calc(45 * var(--u)); height: calc(45 * var(--u)); border-radius: 50%; border: calc(2 * var(--u)) solid var(--page); margin-right: calc(-13 * var(--u)); background-color: var(--page); }
-.copy { position: absolute; left: calc(40 * var(--uw)); top: calc(668 * var(--u)); z-index: 4; width: calc(262 * var(--u)); margin: 0; font-size: calc(14.2 * var(--u)); line-height: 1.52; color: var(--navy); text-indent: calc(51 * var(--u)); }
+.hero-copy { position: absolute; left: calc(40 * var(--uw)); top: calc(668 * var(--u)); z-index: 4; width: calc(262 * var(--u)); }
+.copy { margin: 0; min-height: 4.56em; font-size: calc(14.2 * var(--u)); line-height: 1.52; color: var(--navy); text-indent: calc(51 * var(--u)); }
+.fig-link { display: block; margin-top: calc(12 * var(--u)); font-family: var(--f-label); font-weight: 800; font-variation-settings: "wdth" 125, "wght" 800; font-size: calc(10 * var(--u)); letter-spacing: .1em; line-height: 1.55; text-transform: uppercase; color: var(--navy); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.fig-link:hover { text-decoration-color: var(--blue); }
+.fig-link .arr { text-decoration: none; display: inline-block; margin-left: .5em; }
+/* quiet navy progress: 01-06, the current one's bar fills toward the next swap */
+.ticks { display: flex; gap: calc(12 * var(--u)); margin-top: calc(22 * var(--u)); }
+.tick { position: relative; padding: 0 0 calc(7 * var(--u)); border: 0; background: none; cursor: pointer; color: var(--navy); font-family: var(--f-label); font-weight: 800; font-variation-settings: "wdth" 125, "wght" 800; font-size: calc(9.5 * var(--u)); letter-spacing: .1em; line-height: 1; }
+.tick::before, .tick i { content: ""; position: absolute; left: 0; right: .1em; bottom: 0; height: 2px; }
+.tick::before { background: var(--bone-dark); }
+.tick i { background: var(--navy); transform: scaleX(var(--p, 0)); transform-origin: 0 50%; }
+.tick:not(.on) { --p: 0; }
 .vid { position: absolute; right: calc(42 * var(--uw)); top: calc(617 * var(--u)); z-index: 4; width: calc(280 * var(--u)); height: calc(187 * var(--u)); border-radius: 0; overflow: hidden; background-color: var(--bone-dark); }
 .vid video { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; display: block; opacity: 0; z-index: 1; }
 .vid video.on { opacity: 1; }
@@ -164,10 +178,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-
   .h1 { top: calc(62 * var(--u)); font-size: calc(42 * var(--u)); }
   .ctas { top: calc(152 * var(--u)); }
   .btn { height: calc(38 * var(--u)); padding: 0 calc(16 * var(--u)); font-size: calc(10 * var(--u)); }
-  .ath img { top: calc(111 * var(--u)); width: calc(620 * var(--u)); margin-left: calc(-310 * var(--u)); }
+  .fig { top: calc(111 * var(--u)); width: calc(620 * var(--u)); margin-left: calc(-310 * var(--u)); }
+  .fig-zone { width: calc(300 * var(--u)); margin-left: calc(-150 * var(--u)); top: calc(230 * var(--u)); }
   .avs { left: calc(14 * var(--u)); top: auto; bottom: calc(150 * var(--u)); }
   .av { width: calc(34 * var(--u)); height: calc(34 * var(--u)); margin-right: calc(-10 * var(--u)); }
   .copy { display: none; }
+  .hero-copy { left: calc(14 * var(--u)); top: auto; bottom: calc(16 * var(--u)); width: calc(200 * var(--u)); padding: calc(10 * var(--u)) calc(12 * var(--u)) calc(11 * var(--u)); background: var(--bone); }
+  .fig-link { margin-top: 0; font-size: calc(8.5 * var(--u)); text-underline-offset: 4px; }
+  .ticks { gap: calc(9 * var(--u)); margin-top: calc(12 * var(--u)); }
+  .tick { font-size: calc(8.5 * var(--u)); padding-bottom: calc(6 * var(--u)); }
   .vid { right: calc(12 * var(--u)); top: auto; bottom: calc(16 * var(--u)); width: calc(128 * var(--u)); height: calc(86 * var(--u)); }
   .play { width: calc(32 * var(--u)); height: calc(32 * var(--u)); margin: calc(-16 * var(--u)) 0 0 calc(-16 * var(--u)); }
   .play svg { width: calc(8.57 * var(--u)); height: calc(10 * var(--u)); }
@@ -223,13 +242,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-
       <line x1="704" y1="610" x2="0" y2="300"/><line x1="704" y1="610" x2="0" y2="470"/><line x1="704" y1="610" x2="90" y2="924"/>
       <line x1="704" y1="610" x2="1408" y2="300"/><line x1="704" y1="610" x2="1408" y2="470"/><line x1="704" y1="610" x2="1318" y2="924"/>
     </svg>
-    <div class="ath"><img src="assets/hero.webp" width="1910" height="2560" alt="Ranchers Sweat Drippin Hat in navy floating above the Unisex Offseason Windbreaker" fetchpriority="high"></div>
+    <div class="ath"><img class="fig on intro" src="assets/hero.webp" fetchpriority="high" width="1910" height="2560" alt="Ranchers Sweat Drippin Hat (Navy) floating above the Unisex Offseason Windbreaker" data-name="Unisex Offseason Windbreaker" data-href="https://shop.ranchers.com/products/lil-wayne-windbreaker-jacket" data-line="A light, water-resistant shell with the rider-and-horse logo across the front."><img class="fig" data-src="assets/hero-2.webp" width="1910" height="2560" alt="Trucker Hat (Bone / Navy) floating above the Men's Official Viva Tejas Jersey · White" aria-hidden="true" data-name="Men's Official Viva Tejas Jersey · White" data-href="https://shop.ranchers.com/products/mens-official-jersey" data-line="The Official Jersey of the Texas Ranchers, with a striped fold-over collar."><img class="fig" data-src="assets/hero-3.webp" width="1910" height="2560" alt="Ranchers Red Visor (Red) floating above the Men's Official Viva Tejas Jersey · Red" aria-hidden="true" data-name="Men's Official Viva Tejas Jersey · Red" data-href="https://shop.ranchers.com/products/mens-official-jersey" data-line="The Official Jersey in red, with a tonal feather print on the shoulders."><img class="fig" data-src="assets/hero-4.webp" width="1910" height="2560" alt="Blue Retro Trucker (Teal) floating above the Unisex Offseason Crewneck" aria-hidden="true" data-name="Unisex Offseason Crewneck" data-href="https://shop.ranchers.com/products/ranchers-x-lil-wayne-windbreaker-copy" data-line="Soft mid-weight fleece, colour-blocked in cream, dusty teal and navy."><img class="fig" data-src="assets/hero-5.webp" width="1910" height="2560" alt="Women's Ponytail Hat (Navy) floating above the Women's Official Viva Tejas Jersey · Navy" aria-hidden="true" data-name="Women's Official Viva Tejas Jersey · Navy" data-href="https://shop.ranchers.com/products/womens-official-jersey" data-line="The women's Official Jersey, with a striped crew neck and striped cuffs."><img class="fig" data-src="assets/hero-6.webp" width="1910" height="2560" alt="Ranchers Sweat Drippin Hat (Beige) floating above the White Long Sleeve Shirt" aria-hidden="true" data-name="White Long Sleeve Shirt" data-href="https://shop.ranchers.com/products/long-sleeve-tee-bone" data-line="Texas Ranchers embroidered across the chest in royal blue outline lettering."></div>
+    <div class="fig-zone" aria-hidden="true"></div>
     <h1 class="h1 head wipe" aria-label="Ride tall every season, every rally."><span class="ln l1" aria-hidden="true"><span class="ch">R</span><span class="ch">I</span><span class="ch">D</span><span class="ch">E</span><span class="ch"> </span><span class="ch">T</span><span class="ch">A</span><span class="ch">L</span><span class="ch">L</span><span class="ch"> </span><span class="ch">E</span><span class="ch">V</span><span class="ch">E</span><span class="ch">R</span><span class="ch">Y</span><span class="ch"> </span><span class="ch">S</span><span class="ch">E</span><span class="ch">A</span><span class="ch">S</span><span class="ch">O</span><span class="ch">N</span></span><span class="ln l2" aria-hidden="true"><span class="ch">E</span><span class="ch">V</span><span class="ch">E</span><span class="ch">R</span><span class="ch">Y</span><span class="ch"> </span><span class="ch st" style="--d:90deg;--c:36%">R</span><span class="ch st" style="--d:180deg;--c:62.3%">A</span><span class="ch st" style="--d:90deg;--c:48.9%">L</span><span class="ch st" style="--d:90deg;--c:48.9%">L</span><span class="ch st" style="--d:180deg;--c:38.2%">Y</span><span class="ch st nc">.</span></span></h1>
     <div class="ctas hua"><a class="btn btn-primary" href="https://shop.ranchers.com/products/lil-wayne-windbreaker-jacket" target="_blank" rel="noopener">Shop now</a><a class="btn btn-secondary" href="https://shop.ranchers.com/collections/all-products" target="_blank" rel="noopener">Explore all</a></div>
     <div class="avs hua">
       <a class="av" href="https://shop.ranchers.com/products/atx-hat" target="_blank" rel="noopener" aria-label="ATX Hat" data-img="assets/avatar-1.webp" data-size="128,128"></a><a class="av" href="https://shop.ranchers.com/products/ponytail-hat" target="_blank" rel="noopener" aria-label="Women's Ponytail Hat, Navy" data-img="assets/avatar-2.webp" data-size="128,128"></a><a class="av" href="https://shop.ranchers.com/products/trucker-hat-copy" target="_blank" rel="noopener" aria-label="Blue Retro Trucker" data-img="assets/avatar-3.webp" data-size="128,128"></a>
     </div>
-    <p class="copy hua">A light, water-resistant shell that moves with every swing. Our Offseason Windbreaker cuts the wind on early drills and late matches.</p>
+    <div class="hero-copy hua"><p class="copy">A light, water-resistant shell with the rider-and-horse logo across the front.</p><a class="fig-link" href="https://shop.ranchers.com/products/lil-wayne-windbreaker-jacket" target="_blank" rel="noopener"><span class="fig-name">Unisex Offseason Windbreaker</span><span class="arr" aria-hidden="true">→</span></a><div class="ticks" role="group" aria-label="Hero pieces"><button type="button" class="tick on" aria-current="true" aria-label="01 of 06: Unisex Offseason Windbreaker"><span aria-hidden="true">01</span><i></i></button><button type="button" class="tick" aria-current="false" aria-label="02 of 06: Men's Official Viva Tejas Jersey · White"><span aria-hidden="true">02</span><i></i></button><button type="button" class="tick" aria-current="false" aria-label="03 of 06: Men's Official Viva Tejas Jersey · Red"><span aria-hidden="true">03</span><i></i></button><button type="button" class="tick" aria-current="false" aria-label="04 of 06: Unisex Offseason Crewneck"><span aria-hidden="true">04</span><i></i></button><button type="button" class="tick" aria-current="false" aria-label="05 of 06: Women's Official Viva Tejas Jersey · Navy"><span aria-hidden="true">05</span><i></i></button><button type="button" class="tick" aria-current="false" aria-label="06 of 06: White Long Sleeve Shirt"><span aria-hidden="true">06</span><i></i></button></div></div>
     <div class="vid hua">
       <video class="on" muted playsinline preload="auto" poster="assets/jersey-360.webp" data-size="560,700" data-cell="0,61,560,374" data-focal=".5,.62" aria-label="Men's Official Viva Tejas Jersey in navy, turning 360 degrees"><source src="assets/jersey-360.mp4" type="video/mp4"></video>
       <video muted playsinline preload="none" poster="assets/windbreaker-360.webp" data-size="560,700" data-cell="0,61,560,374" data-focal=".5,.62" aria-label="Unisex Offseason Windbreaker, turning 360 degrees"><source src="assets/windbreaker-360.mp4" type="video/mp4"></video>
@@ -571,7 +591,7 @@ window.stencilCut = (function () {
   syncBtn();
 
   // ---- hero intro ----
-  const navs = $$('.nav'), rays = $('.rays'), ath = $('.ath img'), avs = $('.avs'), copy = $('.copy'), ctas = $('.ctas');
+  const navs = $$('.nav'), rays = $('.rays'), ath = $('.ath .fig'), avs = $('.avs'), copy = $('.hero-copy'), ctas = $('.ctas');
   const l1 = $$('.h1 .l1 .ch'), l2 = $$('.h1 .l2 .ch'), stencilWord = $$('.h1 .l2 .st');
   let started = false;
   const failsafe = setTimeout(() => { if (!started) { started = true; html.classList.remove('js'); } }, 6000);
@@ -587,7 +607,9 @@ window.stencilCut = (function () {
     layout();
     const hold = (phone ? -150 : -236) * U;
     navs.forEach((n) => fade(n, 550));
-    strips(ath, 650, (phone ? 50 : 83) * U, (phone ? 90 : 98) * U, bezier(.3, 0, .2, 1), () => { ath.style.opacity = '1'; });
+    strips(ath, 650, (phone ? 50 : 83) * U, (phone ? 90 : 98) * U, bezier(.3, 0, .2, 1), () => { ath.style.opacity = '1'; })
+      .then(() => { ath.classList.remove('intro'); ath.style.opacity = ''; });
+    setTimeout(() => loadFig(figs[1]), 1700);                          // the next figure loads while the headline wipes
     ath.animate([{ transform: `translateY(${hold}px)` }, { transform: 'translateY(0px)' }], { duration: 620, delay: 1020, easing: 'cubic-bezier(.3,0,.15,1)', fill: 'both' });
     fade(rays, 600, 1100);
     fade(vidCard, 550, 1130);
@@ -596,14 +618,82 @@ window.stencilCut = (function () {
     wipe(l1, 1540, 18);
     const end2 = wipe(l2, 1570, 40);
     setTimeout(backspace, end2 + 150);
+    setTimeout(() => { rotOn = true; }, end2 + 150 + BACKSPACE_MS);    // rotation starts once the retype is done
   }
   // once: hide RALLY. back to its first three letters at 45 ms per letter, hold 450 ms, retype at 50 ms per letter
+  const BACKSPACE_MS = (stencilWord.length - 4) * 45 + 450 + (stencilWord.length - 3) * 50;
   function backspace() {
     const gone = stencilWord.slice(3).reverse();
     gone.forEach((s, i) => setTimeout(() => { s.style.visibility = 'hidden'; }, i * 45));
     const back = (gone.length - 1) * 45 + 450;
     gone.slice().reverse().forEach((s, i) => setTimeout(() => { s.style.visibility = ''; }, back + i * 50));
   }
+
+  // ---- hero rotation: after the intro, the next cap-and-top figure strips in over the current one every ROT ms, with
+  // the intro's own bands (650 ms, same pitch and phase), at the settled framing: no slide, no scaling. The copy, the
+  // product link, SHOP NOW and the 01-06 ticks follow. Pauses on hover or focus, when the tab is hidden and off screen.
+  const figs = $$('.ath .fig'), ticks = $$('.tick'), heroCopy = $('.hero-copy'), copyP = $('.hero-copy .copy');
+  const figLink = $('.fig-link'), figName = $('.fig-name'), shopNow = $('.btn-primary'), heroSec = $('.hero');
+  const ROT = 4600;
+  let fi = 0, rotOn = false, rotElapsed = 0, swapping = false, hoverPause = false, focusPause = false, heroVisible = true;
+  function loadFig(img) {
+    if (!img) return Promise.resolve();
+    if (!img.getAttribute('src') && img.dataset.src) img.src = img.dataset.src;
+    return img.decode ? img.decode().catch(() => {}) : Promise.resolve();
+  }
+  function setCopy(img, animate) {
+    const apply = () => {
+      copyP.textContent = img.dataset.line; figName.textContent = img.dataset.name;
+      figLink.href = img.dataset.href; shopNow.href = img.dataset.href;
+    };
+    if (!animate) { apply(); return; }
+    const els = [copyP, figLink];
+    Promise.all(els.map((e) => e.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 180, easing: 'cubic-bezier(.45,0,.35,1)', fill: 'forwards' }).finished))
+      .then(() => { apply(); els.forEach((e) => e.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 320, easing: DEF, fill: 'forwards' })); });
+  }
+  function setTicks() {
+    ticks.forEach((t, i) => {
+      t.classList.toggle('on', i === fi);
+      t.setAttribute('aria-current', i === fi ? 'true' : 'false');
+      t.style.setProperty('--p', i === fi ? (rotOn && !reduced ? Math.min(1, rotElapsed / ROT).toFixed(3) : '1') : '0');
+    });
+  }
+  function settle(prev) {
+    prev.classList.toggle('on', false);
+    prev.classList.toggle('intro', false);
+    prev.style.opacity = '';
+    swapping = false;
+    loadFig(figs[(fi + 1) % figs.length]);
+  }
+  async function showFig(n) {
+    if (n === fi || swapping) return;
+    swapping = true;
+    const prev = figs[fi], next = figs[n];
+    await loadFig(next);
+    fi = n; rotElapsed = 0;
+    figs.forEach((f) => { f.style.zIndex = f === next ? 2 : f === prev ? 1 : 0; f.setAttribute('aria-hidden', f === next ? 'false' : 'true'); });
+    setCopy(next, !reduced);
+    setTicks();
+    if (reduced || !started || !html.classList.contains('js')) { next.classList.add('on'); settle(prev); return; }
+    await strips(next, 650, (phone ? 50 : 83) * U, (phone ? 90 : 98) * U, bezier(.3, 0, .2, 1), () => { next.classList.add('on'); });
+    settle(prev);
+  }
+  function heroTick(dt) {
+    if (!rotOn || swapping || reduced) return;
+    if (hoverPause || focusPause || document.hidden || !heroVisible) return;
+    rotElapsed += dt;
+    ticks[fi].style.setProperty('--p', Math.min(1, rotElapsed / ROT).toFixed(3));
+    if (rotElapsed >= ROT) showFig((fi + 1) % figs.length);
+  }
+  ticks.forEach((t, i) => t.addEventListener('click', () => showFig(i)));
+  [$('.fig-zone'), heroCopy].forEach((el) => {
+    el.addEventListener('pointerenter', () => { hoverPause = true; });
+    el.addEventListener('pointerleave', () => { hoverPause = false; });
+  });
+  heroCopy.addEventListener('focusin', () => { focusPause = true; });
+  heroCopy.addEventListener('focusout', () => { focusPause = false; });
+  if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; }, { threshold: 0.25 }).observe(heroSec);
+  setTicks();
 
   // ---- collage, lineup and marquee triggers ----
   const colSec = $('.col'), photo = $('.c-mid .photo'), lpSec = $('.lp');
@@ -639,7 +729,10 @@ window.stencilCut = (function () {
   }
 
   // ---- one frame loop: rows every frame, triggers ----
+  let lastFrame = performance.now();
   function frame(now) {
+    const dt = Math.min(100, now - lastFrame); lastFrame = now;
+    heroTick(dt);
     placeRows(now);
     if (live() && started) {
       if (!colDone && inView(colSec.getBoundingClientRect(), .18, .30)) { colDone = true; collage(); }
