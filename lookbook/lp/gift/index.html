@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en" data-view="pro" data-hook="hook_a">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gift the Ranchers · Texas Ranchers</title>
+<meta name="description" content="Still shopping for your pickleball person? Hats, jerseys, jugs and more from the Texas Ranchers.">
+<meta name="robots" content="noindex">
+<script>
+/* choose the view and the hook before first paint: utm_term holds the ad set name (Visitors / engagers = retargeting),
+   utm_content the hook the ad showed. No params = prospecting, hook A. */
+(function (h) {
+  h.classList.add('js');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('rm');
+  var q; try { q = new URLSearchParams(location.search); } catch (e) { return; }
+  if (/visitors|engagers/i.test(q.get('utm_term') || '')) h.setAttribute('data-view', 'ret');
+  if ((q.get('utm_content') || '').toLowerCase() === 'hook_b') h.setAttribute('data-hook', 'hook_b');
+})(document.documentElement);
+</script>
+<link rel="stylesheet" href="../../assets/fonts/solano.css">
+<link rel="stylesheet" href="https://use.typekit.net/gzo2cgx.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=Barlow+Condensed:wght@600;700&amp;display=swap">
+<link rel="stylesheet" href="../../assets/lb.css">
+<style>
+/* view and hook switches (set on <html> before paint) */
+[data-view="pro"] .v-ret, [data-view="ret"] .v-pro, [data-hook="hook_a"] .h-b, [data-hook="hook_b"] .h-a { display: none !important; }
+
+.lp-hdr { position: sticky; top: 0; z-index: 30; background: var(--navy); color: var(--bone); }
+.lp-hdr-in { display: flex; align-items: center; gap: 18px; height: 56px; padding: 0 8px 0 var(--gut); max-width: 1440px; margin: 0 auto; }
+.lp-hdr .brand { position: static; transform: none; }
+.lp-hdr .brand img { height: 20px; }
+.lp-hdr .quiet { margin-left: auto; font-size: 11px; color: rgba(231, 228, 221, .85); text-decoration: none; padding: 10px 4px; }
+.lp-hdr .quiet:hover { color: var(--bone); text-decoration: underline; text-underline-offset: 4px; }
+
+.lp-top { display: flex; flex-direction: column; }
+.lp-media { margin: 0; position: relative; background: var(--navy); }
+.lp-scene img { width: 100%; aspect-ratio: var(--ratio, 4 / 3); object-fit: cover; }
+.lp-stage { position: relative; background: var(--bone); aspect-ratio: 16 / 10; overflow: hidden; }
+.lp-stage::before { content: ""; position: absolute; inset: 0; background: url("../../assets/tex/bone-leather.webp") center / cover; opacity: .35; }
+.lp-stage img { position: absolute; inset: 6% 10%; width: 80%; height: 88%; object-fit: contain; transition: opacity var(--base) var(--ease); }
+.lp-panel { padding: 22px var(--gut) 28px; }
+.lp-eyebrow { font-size: 11.5px; letter-spacing: .18em; margin: 0 0 10px; color: var(--bone-600); }
+.lp-h1 { font-size: clamp(46px, 12.6vw, 96px); color: var(--navy); }
+.lp-sub { margin: 12px 0 0; font-size: 16px; line-height: 1.5; max-width: 34em; }
+.chip { display: inline-block; margin: 0 0 12px; padding: 7px 10px 6px; border: 2px solid var(--navy); font-size: 11px; letter-spacing: .14em; }
+
+/* product picker */
+.pick { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--bone-dark); }
+.cuts { display: inline-flex; border: 2px solid var(--navy); margin-bottom: 14px; }
+.cuts button { min-width: 100px; height: 38px; padding: 0 16px; font-size: 11.5px; letter-spacing: .12em; color: var(--navy); }
+.cuts button[aria-checked="true"] { background: var(--navy); color: var(--bone); }
+.prod-row { display: flex; align-items: center; gap: 14px; }
+.prod-thumb { flex: none; width: 64px; height: 76px; background: var(--bone); display: flex; align-items: center; justify-content: center; }
+.prod-thumb img { width: 56px; height: 68px; object-fit: contain; }
+.prod-name { margin: 0; font-size: 15px; line-height: 1.3; }
+.prod-price { margin: 2px 0 0; font-size: 15px; }
+.sw-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 16px; }
+.swb { position: relative; width: 40px; height: 40px; border: 2px solid transparent; padding: 3px; }
+.swb i { display: block; width: 100%; height: 100%; border: 1px solid rgba(0, 42, 58, .3); }
+.swb[aria-checked="true"] { border-color: var(--navy); }
+.swb:hover { border-color: var(--bone-400); }
+.swb[aria-checked="true"]:hover { border-color: var(--navy); }
+.sw-label { font-size: 14px; margin-left: 4px; }
+.sizes { margin: 12px 0 0; font-size: 13px; color: var(--bone-600); }
+.lp-cta { width: 100%; margin-top: 20px; }
+.lp-ship { margin: 12px 0 0; font-size: 13px; text-align: center; }
+.lp-ship b { font-weight: inherit; }
+.second { display: block; margin-top: 12px; text-align: center; font-size: 11.5px; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+
+/* why / reasons to believe */
+.lp-why { background: var(--navy); color: var(--bone); padding: 40px var(--gut) 44px; }
+.lp-why-in { max-width: 1240px; margin: 0 auto; }
+.lp-why .who { margin: 0 0 22px; font-size: 16px; color: rgba(231, 228, 221, .9); max-width: 36em; }
+.lp-why h2 { font-size: 36px; margin-bottom: 18px; }
+.facts { list-style: none; margin: 0 0 26px; padding: 0; display: grid; gap: 12px; }
+.facts li { position: relative; padding-left: 26px; font-size: 15px; line-height: 1.45; }
+.facts li::before { content: ""; position: absolute; left: 0; top: .55em; width: 12px; height: 3px; background: var(--blue); }
+.lp-why .btn { width: 100%; }
+.lp-why .lp-ship { color: rgba(231, 228, 221, .82); }
+
+/* add-on and gift cards */
+.lp-more { padding: 40px var(--gut) 48px; }
+.lp-more-in { max-width: 1240px; margin: 0 auto; }
+.lp-more h2 { font-size: 36px; margin: 0 0 18px; }
+.addon { display: flex; align-items: center; gap: 16px; text-decoration: none; color: var(--navy); background: var(--white); border: 1px solid var(--bone-dark); padding: 12px; }
+.addon .tile { flex: none; width: 96px; aspect-ratio: 4 / 5; background: var(--bone); position: relative; }
+.addon .tile img { position: absolute; inset: 8%; width: 84%; height: 84%; object-fit: contain; }
+.addon p { margin: 0; }
+.addon .k { font-size: 11px; color: var(--bone-600); margin-bottom: 4px; }
+.addon .go { margin-left: auto; font-size: 11px; text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 2px; white-space: nowrap; }
+.gifts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 4px; }
+.gift .line { display: block; margin: 10px 2px 2px; font-family: var(--f-head); font-weight: 700; text-transform: uppercase; font-size: 22px; line-height: .95; }
+.gift .meta { padding-top: 6px; }
+.lp-gifts-top { padding: 4px var(--gut) 8px; }
+
+.lp-ftr { background: var(--navy-900); color: rgba(231, 228, 221, .75); padding: 28px var(--gut) 34px; font-size: 13px; }
+.lp-ftr-in { max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; }
+.lp-ftr img { width: 56px; height: auto; }
+.lp-ftr nav { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.lp-ftr a { text-decoration: none; }
+.lp-ftr a:hover { color: var(--bone); text-decoration: underline; text-underline-offset: 3px; }
+.lp-ftr .sign { margin-left: auto; font-family: var(--f-head); font-weight: 700; font-size: 20px; color: var(--bone); }
+
+/* retargeting: get to the buy faster (hook, then product and options, then the CTA) */
+[data-view="ret"] .lp-panel { padding-top: 18px; }
+[data-view="ret"] .lp-top { flex-direction: column; }
+[data-view="ret"] .lp-head { order: 0; }
+.lp-sub-ret { margin-top: 8px; font-size: 15px; }
+[data-view="ret"] .lp-h1 { font-size: clamp(42px, 11vw, 88px); }
+[data-view="ret"] .prod-thumb { display: none; }
+
+@media (min-width: 900px) {
+  .lp-hdr-in { height: 72px; padding-right: var(--gut); }
+  .lp-hdr .brand img { height: 24px; }
+  .lp-top { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); align-items: center; max-width: 1440px; margin: 0 auto; }
+  .lp-media { align-self: stretch; }
+  .lp-scene { height: 100%; }
+  .lp-scene picture, .lp-scene img { height: 100%; }
+  .lp-scene img { aspect-ratio: auto; min-height: calc(100vh - 72px); max-height: 860px; }
+  .lp-stage { aspect-ratio: auto; height: 100%; min-height: calc(100vh - 72px); max-height: 860px; }
+  .lp-panel { padding: 48px 56px; max-width: 640px; }
+  .lp-h1 { font-size: clamp(64px, 6vw, 96px); }
+  [data-view="ret"] .lp-h1 { font-size: clamp(60px, 5.4vw, 88px); }
+  .lp-cta { width: auto; min-width: 280px; }
+  .lp-ship, .second { text-align: left; }
+  .lp-why { padding: 64px var(--gut); }
+  .lp-why-in { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .lp-why .btn { width: auto; min-width: 280px; }
+  .lp-why .lp-ship { text-align: left; }
+  .gifts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 4px; }
+  .gift .line { font-size: 28px; }
+  .lp-more { padding: 64px var(--gut); }
+  .addon { max-width: 560px; }
+}
+@media (min-width: 900px) {
+  [data-view="ret"] .lp-top-gifts { display: block; max-width: 1240px; margin: 0 auto; padding: 0 var(--gut); }
+  [data-view="ret"] .lp-top-gifts .lp-panel { max-width: 920px; padding: 48px 0 0; }
+  [data-view="ret"] .lp-top-gifts + .lp-more { padding-top: 40px; }
+}
+@media (min-width: 1200px) { .gifts { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+</style>
+</head>
+<body class="on-bone">
+<a class="skip lbl" href="#main">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M4 7h16l-1.2 14H5.2Z"/><path d="M8.5 10V6.5a3.5 3.5 0 0 1 7 0V10"/></symbol>
+</svg>
+<header class="lp-hdr">
+  <div class="lp-hdr-in">
+    <a class="brand" data-utm href="https://shop.ranchers.com/" target="_blank" rel="noopener" aria-label="Texas Ranchers store home"><img src="../../assets/brand/wordmark-bone.webp" alt="Ranchers" width="300" height="70"></a>
+    <a class="quiet lbl" data-utm href="https://shop.ranchers.com/collections/all-products" target="_blank" rel="noopener">Shop all</a>
+    <a class="icon-btn" data-utm href="https://shop.ranchers.com/cart" target="_blank" rel="noopener" aria-label="Bag"><svg class="ico"><use href="#i-bag"/></svg></a>
+  </div>
+</header>
+
+<main id="main">
+<section class="lp-top lp-top-gifts">
+  <figure class="lp-media v-pro">
+    <div class="lp-scene " style="--ratio:4 / 3"><picture><source media="(min-width: 900px)" srcset="../../assets/scenes/hero-fence-sq-1200.webp"><img src="../../assets/scenes/fence-43-780.webp" srcset="../../assets/scenes/fence-43-780.webp 780w, ../../assets/scenes/fence-43-1200.webp 1200w" sizes="100vw" width="780" height="585" alt="The Unisex Offseason Windbreaker on a fence post in the Hill Country at golden hour, with the navy Sweat Drippin Hat on top of the post" fetchpriority="high" decoding="async"></picture></div>
+  </figure>
+  <div class="lp-panel">
+      <div class="lp-head"><p class="chip lbl h-a v-pro">For your pickleball people</p>
+        <p class="lp-eyebrow lbl"><span class="v-pro">Texas Ranchers gifts</span><span class="v-ret">Back for a gift?</span></p>
+        <h1 class="hd lp-h1"><span class="h-a">Gift the Ranchers.</span><span class="h-b">Still shopping for your pickleball person?</span></h1>
+        <p class="lp-sub v-pro"><span>Hats, jerseys, jugs and more from the Texas Ranchers.</span></p>
+      </div>
+      <a class="btn btn-red lbl lp-cta" data-utm data-cta href="https://shop.ranchers.com/collections/all-products" target="_blank" rel="noopener">Shop the Ranchers</a>
+      <p class="lp-ship"><span class="v-pro">Free shipping through Dec 14 · US orders</span><span class="v-ret">Free shipping ends Dec 14 · US orders</span></p>
+  </div>
+</section>
+<section class="lp-more" aria-labelledby="gifts-h"><div class="lp-more-in">
+  <h2 class="hd" id="gifts-h">For the one who…</h2>
+  <div class="gifts">
+    <a class="pcard gift" data-utm href="https://shop.ranchers.com/products/udrippin-hat" target="_blank" rel="noopener"><span class="tile"><img class="main" src="../../assets/p/store-udrippin-hat-navy-three-quarter.webp" width="600" height="441" alt="Ranchers Sweat Drippin Hat" loading="lazy" decoding="async"></span><span class="line">Sweats.</span><span class="meta"><span class="name">Ranchers Sweat Drippin Hat</span><span class="price num">$34</span><span class="sw" aria-hidden="true"><i style="background:#e6dbc1"></i><i style="background:#1f2c3b"></i><i style="background:#f5f3ef"></i><small>3 colors</small></span></span></a>
+    <a class="pcard gift" data-utm href="https://shop.ranchers.com/products/half-gallon-jug-navy" target="_blank" rel="noopener"><span class="tile"><img class="main" src="../../assets/p/store-half-gallon-jug-red-front.webp" width="372" height="720" alt="Texas Ranchers x Ice Shaker Half Gallon Jug" loading="lazy" decoding="async"></span><span class="line">Stays cold.</span><span class="meta"><span class="name">Texas Ranchers x Ice Shaker Half Gallon Jug</span><span class="price num">$75</span><span class="sw" aria-hidden="true"><i style="background:#d8282b"></i><i style="background:#f5f3ef"></i><i style="background:#24509b"></i><small>3 colors</small></span></span></a>
+    <a class="pcard gift" data-utm href="https://shop.ranchers.com/products/mens-official-jersey" target="_blank" rel="noopener"><span class="tile"><img class="main" src="../../assets/p/store-mens-jersey-navy-front.webp" width="551" height="720" alt="Men&#x27;s Official Viva Tejas Jersey" loading="lazy" decoding="async"></span><span class="line">Reps the team.</span><span class="meta"><span class="name">Men&#x27;s Official Viva Tejas Jersey</span><span class="price num">$68</span><span class="sw" aria-hidden="true"><i style="background:#e3a556"></i><i style="background:#1f2c3b"></i><i style="background:#d8282b"></i><i style="background:#f5f3ef"></i><small>4 colors</small></span></span></a>
+    <a class="pcard gift" data-utm href="https://shop.ranchers.com/products/ranchers-fanny-pack" target="_blank" rel="noopener"><span class="tile"><img class="main" src="../../assets/p/store-fanny-pack-red-three-quarter.webp" width="600" height="306" alt="Ranchers Fanny Pack" loading="lazy" decoding="async"></span><span class="line">Travels to play.</span><span class="meta"><span class="name">Ranchers Fanny Pack</span><span class="price num">$14</span></span></a>
+    <a class="pcard gift" data-utm href="https://shop.ranchers.com/products/lil-wayne-windbreaker-jacket" target="_blank" rel="noopener"><span class="tile"><img class="main" src="../../assets/p/store-windbreaker-v3-front.webp" width="600" height="695" alt="Unisex Offseason Windbreaker" loading="lazy" decoding="async"></span><span class="line">Never takes an offseason.</span><span class="meta"><span class="name">Unisex Offseason Windbreaker</span><span class="price num">$85</span></span></a>
+    <a class="pcard gift" data-utm href="https://shop.ranchers.com/products/hat" target="_blank" rel="noopener"><span class="tile"><img class="main" src="../../assets/p/store-trucker-hat-v2-three-quarter.webp" width="600" height="487" alt="Trucker Hat" loading="lazy" decoding="async"></span><span class="line">Needs one more hat.</span><span class="meta"><span class="name">Trucker Hat</span><span class="price num">$35</span></span></a>
+  </div>
+</div></section>
+<section class="lp-why" aria-labelledby="why-h"><div class="lp-why-in">
+  <div><p class="who">Official merch of the Texas Ranchers, Austin&#x27;s Major League Pickleball club.</p><h2 class="hd" id="why-h">Shop the Ranchers</h2></div>
+  <div><a class="btn btn-red lbl lp-cta" data-utm data-cta href="https://shop.ranchers.com/collections/all-products" target="_blank" rel="noopener">Shop the Ranchers</a><p class="lp-ship"><span class="v-pro">Free shipping through Dec 14 · US orders</span><span class="v-ret">Free shipping ends Dec 14 · US orders</span></p></div>
+</div></section>
+</main>
+
+<footer class="lp-ftr">
+  <div class="lp-ftr-in">
+    <img src="../../assets/brand/icon-bone.webp" alt="Texas Ranchers rider mark" width="222" height="144" loading="lazy">
+    <span>© 2026 Texas Ranchers</span>
+    <nav aria-label="Legal">
+      <a href="https://shop.ranchers.com/policies/refund-policy" target="_blank" rel="noopener">Refund policy</a>
+      <a href="https://shop.ranchers.com/policies/privacy-policy" target="_blank" rel="noopener">Privacy policy</a>
+      <a href="https://shop.ranchers.com/policies/terms-of-service" target="_blank" rel="noopener">Terms of service</a>
+    </nav>
+    <span class="sign">#RideTall</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  /* carry the visitor's UTM parameters to every store link */
+  var q; try { q = new URLSearchParams(location.search); } catch (e) { q = null; }
+  var KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  function withUtm(href) {
+    if (!q) return href;
+    try { var u = new URL(href); KEYS.forEach(function (k) { var v = q.get(k); if (v) u.searchParams.set(k, v); }); return u.toString(); } catch (e) { return href; }
+  }
+  function tagLinks(root) { $$('a[data-utm]', root).forEach(function (a) { a.href = withUtm(a.getAttribute('data-href') || a.getAttribute('href')); }); }
+  $$('a[data-utm]').forEach(function (a) { a.setAttribute('data-href', a.getAttribute('href')); });
+  tagLinks();
+
+  /* product picker: cut (men's / women's), colour swatches swap the renders; facts follow the selected cut */
+  var pick = document.querySelector('.pick');
+  if (!pick) return;
+  var cfg = JSON.parse(document.getElementById('lp-cfg').textContent);
+  var state = { p: cfg.products[0].id };
+  var byId = {}; cfg.products.forEach(function (p) { byId[p.id] = p; p.sel = p.default; });
+  function render() {
+    var p = byId[state.p], c = p.colors.filter(function (x) { return x.name === p.sel; })[0];
+    $$('[data-prod-img]').forEach(function (img) { img.src = img.hasAttribute('data-lg') ? c.lg : c.sm; img.alt = p.title + ', ' + c.name; });
+    $$('[data-prod-name]').forEach(function (el) { el.textContent = p.title; });
+    $$('[data-prod-price]').forEach(function (el) { el.textContent = p.price; });
+    $$('[data-prod-sizes]').forEach(function (el) { el.textContent = p.sizes; el.hidden = !p.sizes; });
+    $$('.sw-group').forEach(function (g) { g.hidden = g.getAttribute('data-for') !== p.id; });
+    $$('.swb').forEach(function (b) { if (b.getAttribute('data-for') !== p.id) return; var on = b.getAttribute('data-c') === p.sel; b.setAttribute('aria-checked', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; });
+    $$('[data-sw-label]').forEach(function (el) { el.textContent = p.sel; });
+    $$('.cuts button').forEach(function (b) { b.setAttribute('aria-checked', b.getAttribute('data-p') === p.id ? 'true' : 'false'); b.tabIndex = b.getAttribute('data-p') === p.id ? 0 : -1; });
+    $$('.facts[data-for]').forEach(function (f) { f.hidden = f.getAttribute('data-for') !== p.id; });
+    if (cfg.perProduct) $$('a[data-cta]').forEach(function (a) { a.setAttribute('data-href', p.url); a.href = withUtm(p.url); });
+  }
+  $$('.cuts button').forEach(function (b, k, all) {
+    b.addEventListener('click', function () { state.p = b.getAttribute('data-p'); render(); });
+    b.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { var o = all[(k + (e.key === 'ArrowRight' ? 1 : all.length - 1)) % all.length]; o.click(); o.focus(); } });
+  });
+  $$('.swb').forEach(function (b) {
+    b.addEventListener('click', function () { byId[b.getAttribute('data-for')].sel = b.getAttribute('data-c'); render(); });
+    b.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      var g = $$('.swb[data-for="' + b.getAttribute('data-for') + '"]'), k = g.indexOf(b);
+      var o = g[(k + (e.key === 'ArrowRight' ? 1 : g.length - 1)) % g.length]; o.click(); o.focus();
+    });
+  });
+  render();
+})();
+</script>
+</body>
+</html>

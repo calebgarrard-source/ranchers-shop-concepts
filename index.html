@@ -12,8 +12,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..900&family=Barlow+Condensed:wght@600;700&display=swap">
 <style>
-/* Layout: a navy masthead (wordmark, eyebrow, Solano title, intro) closed by the 3px red rule, then three square concept
-   cards on textured bone, a notes panel and a sheared #RideTall callout. Brand: Navy 45 / Bone 38 / Red 10 / Blue 7. */
+/* Layout: a navy masthead (wordmark, eyebrow, Solano title, intro) closed by the 3px red rule, then five square concept
+   cards on textured bone (three, then the two newest wider), the ad landing-page tester, a notes panel and a sheared
+   #RideTall callout. Brand: Navy 45 / Bone 38 / Red 10 / Blue 7. */
 :root {
   --navy: #002a3a; --navy-deep: #001721; --bone: #e7e4dd; --bone-dark: #dedbd3; --red: #e02826; --blue: #7ca7ad;
   --page: #f2f0ec; --page-tex: url("tex/bone-page.webp");
@@ -46,8 +47,11 @@ h1 { margin: 0; font: 700 clamp(56px, 9vw, 112px)/.92 var(--display); text-trans
 /* body on textured bone */
 main { position: relative; background: var(--page) var(--page-tex) center top / cover no-repeat; }
 main .inner { position: relative; padding-block: 40px 56px; }
-.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-@media (max-width: 960px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 20px; }
+.grid .card { grid-column: span 2; }
+.grid .card.wide { grid-column: span 3; }
+.card.wide .shot { aspect-ratio: 16 / 9; }
+@media (max-width: 960px) { .grid { grid-template-columns: minmax(0, 1fr); } .grid .card, .grid .card.wide { grid-column: auto; } .card.wide .shot { aspect-ratio: 16 / 10; } }
 .card { display: flex; flex-direction: column; min-width: 0; background: var(--card); border: 1px solid var(--line); color: inherit; text-decoration: none; transition: border-color .25s, transform .35s cubic-bezier(.16,1,.3,1); }
 .card:hover { border-color: var(--strong); transform: translateY(-3px); }
 .card:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
@@ -63,22 +67,45 @@ h2 { margin: 0; font: 700 40px/.92 var(--display); text-transform: uppercase; le
 .open svg { transition: transform .4s cubic-bezier(.2,1.6,.4,1); }
 .card:hover .open svg { transform: translateX(4px); }
 
+.lps { margin-top: 44px; background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--red); padding: 24px 22px 26px; display: grid; gap: 18px; }
+.lps .label.k { font-size: 11px; color: var(--muted); }
+.lps h2 { font-size: clamp(34px, 5vw, 48px); }
+.lps > p { margin: 0; max-width: 72ch; color: var(--muted); }
+.controls { display: flex; flex-wrap: wrap; gap: 14px 28px; }
+.controls fieldset { margin: 0; padding: 0; border: 0; display: grid; gap: 8px; min-width: 0; }
+@media (max-width: 720px) { .controls fieldset { flex: 1 1 100%; } }
+.controls legend { padding: 0; margin-bottom: 8px; font-size: 11px; color: var(--muted); }
+.seg { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.seg label { cursor: pointer; font-size: 11px; line-height: 1.3; text-align: center; padding: 11px 14px 10px; border: 2px solid var(--strong); color: var(--strong); user-select: none; }
+.seg label + input + label { border-left: 0; }
+.seg input:checked + label { background: var(--strong); color: var(--card); }
+.seg input:focus-visible + label { outline: 2px solid var(--blue); outline-offset: 2px; position: relative; z-index: 1; }
+.opens { margin: 0; font-size: 12px; color: var(--muted); }
+.opens b { color: var(--strong); font-family: var(--display); font-weight: 700; font-size: 18px; letter-spacing: .02em; text-transform: uppercase; }
+.lp-rows { display: grid; border-top: 1px solid var(--line); }
+.lp-row { display: grid; grid-template-columns: minmax(150px, 220px) repeat(3, minmax(0, 1fr)); gap: 10px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.lp-row h3 { margin: 0; font: 700 26px/.95 var(--display); text-transform: uppercase; letter-spacing: .01em; }
+.lp-row a { display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px; border: 1px solid var(--line); color: var(--strong); text-decoration: none; font-size: 11px; transition: background-color .2s, color .2s, border-color .2s; }
+.lp-row a:hover { background: var(--strong); color: var(--card); border-color: var(--strong); }
+.lp-row a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+@media (max-width: 720px) { .lp-row { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 14px 0 16px; } .lp-row h3 { margin-bottom: 4px; } }
 .notes { margin-top: 32px; max-width: 80ch; background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--red); padding: 20px 22px; display: grid; gap: 8px; }
 .notes .label { font-size: 11px; color: var(--muted); margin-bottom: 2px; }
 .notes p { margin: 0; }
 .sign { margin-top: 36px; }
 .callout { display: inline-block; background: var(--red); color: var(--bone); font: 700 34px/1 var(--display); text-transform: uppercase; letter-spacing: .02em; padding: .14em .38em .1em; transform: skewX(-10deg); }
 .callout span { display: inline-block; transform: skewX(10deg); }
-@media (prefers-reduced-motion: reduce) { .card, .open svg { transition: none; } .card:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .card, .open svg, .lp-row a { transition: none; } .card:hover { transform: none; } }
 </style>
 </head>
 <body>
 <header class="mast gutter">
   <div class="inner">
     <img class="mark" src="brand/wordmark-full-bone.png" width="640" height="214" alt="Texas Ranchers">
-    <span class="eyebrow label">shop.ranchers.com &middot; homepage concepts</span>
+    <span class="eyebrow label">shop.ranchers.com &middot; homepage concepts &middot; ad landing pages</span>
     <h1>Shop Concepts</h1>
-    <p class="intro">Three homepage directions for the store. Each one follows a design prompt, rebuilt with renders of the real merch, the official marks, the brand's type and textures, and the store's own titles, sizes and prices. Nothing on shop.ranchers.com has changed.</p>
+    <p class="intro">Five homepage directions for the store, each with its own landing pages for the holiday ads. Every page is built from renders of the real merch, the official marks, the brand's type and textures, and the store's own titles, sizes and prices. Nothing on shop.ranchers.com has changed.</p>
   </div>
 </header>
 
@@ -86,11 +113,11 @@ h2 { margin: 0; font: 700 40px/.92 var(--display); text-transform: uppercase; le
   <div class="inner">
     <section class="grid" aria-label="Concepts">
       <a class="card" href="every-season/index.html">
-        <div class="shot"><img src="thumbs/every-season.webp" alt="Every Season concept: a framed hero with a navy cap floating over the Offseason Windbreaker" width="1200" height="750"></div>
+        <div class="shot"><img src="thumbs/every-season.webp" alt="Every Season concept: a framed hero with a navy cap floating over the Offseason Windbreaker, one of six rotating pairings" width="1200" height="750"></div>
         <div class="body">
-          <div class="meta"><span class="label">Option 01 &middot; Landing page</span><span class="status label">Ready</span></div>
+          <div class="meta"><span class="label">Option 01 &middot; Motion</span><span class="status label">Ready</span></div>
           <h2>Every Season</h2>
-          <p>A framed hero with a cap floating over the windbreaker, a giant outlined RANCHERS collage, a shop-the-lineup grid and a stencil marquee.</p>
+          <p>A framed hero that rotates through six cap-and-top pairings, a giant outlined RANCHERS collage, a shop-the-lineup grid and a navy marquee.</p>
           <span class="open label">Open concept <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></span>
         </div>
       </a>
@@ -112,17 +139,77 @@ h2 { margin: 0; font: 700 40px/.92 var(--display); text-transform: uppercase; le
           <span class="open label">Open concept <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></span>
         </div>
       </a>
+      <a class="card wide" href="lookbook/index.html">
+        <div class="shot"><img src="thumbs/lookbook.webp" alt="Lookbook concept: new scene renders of the merch on location, under a full-width hero with shop buttons" width="1200" height="750"></div>
+        <div class="body">
+          <div class="meta"><span class="label">Option 04 &middot; Lookbook</span><span class="status label">New</span></div>
+          <h2>Lookbook</h2>
+          <p>New scene renders of the merch on location: the windbreaker on a Hill Country fence post, the jerseys on a limestone wall, the jug courtside at sunset. Then the lineup, shop by category and shop by color.</p>
+          <span class="open label">Open concept <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+      <a class="card wide" href="collections/index.html">
+        <div class="shot"><img src="thumbs/collections.webp" alt="Collections concept: the Offseason Windbreaker floating on True Navy under a slim header" width="1200" height="750"></div>
+        <div class="body">
+          <div class="meta"><span class="label">Option 05 &middot; Product first</span><span class="status label">New</span></div>
+          <h2>Collections</h2>
+          <p>One piece at a time on True Navy: the windbreaker hero, close-up detail bands, the Viva Tejas jerseys with men's and women's tabs, and category tiles.</p>
+          <span class="open label">Open concept <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+    </section>
+
+    <section class="lps" aria-labelledby="lps-h">
+      <span class="label k">Ad landing pages</span>
+      <h2 id="lps-h">One page per ad</h2>
+      <p>Each concept has a page for each ad in the holiday ad sets. The page opens on the ad's hook and changes with who clicked: people new to the club get a line on who we are and why to buy; people who have visited the store or engaged with the club get straight to buying, with the free-shipping deadline. Pick a combination, then open any page.</p>
+      <div class="controls">
+        <fieldset>
+          <legend class="label">Who clicked</legend>
+          <div class="seg"><input type="radio" name="aud" id="aud-pro" value="pro" checked><label class="label" for="aud-pro">New to the club</label><input type="radio" name="aud" id="aud-ret" value="ret"><label class="label" for="aud-ret">Visited or engaged</label></div>
+        </fieldset>
+        <fieldset>
+          <legend class="label">Ad hook</legend>
+          <div class="seg"><input type="radio" name="hook" id="hook-a" value="hook_a" checked><label class="label" for="hook-a">Hook A</label><input type="radio" name="hook" id="hook-b" value="hook_b"><label class="label" for="hook-b">Hook B</label></div>
+        </fieldset>
+      </div>
+      <p class="opens" id="opens" aria-live="polite">Pages open on: <b>Official Jersey.</b> &middot; <b>60+ Hours Cold.</b> &middot; <b>Gift the Ranchers.</b></p>
+      <div class="lp-rows">
+      <div class="lp-row"><h3>Every Season</h3><a data-lp="every-season/lp/official-jersey/index.html" href="every-season/lp/official-jersey/index.html?utm_source=concept_test&amp;utm_term=Texas%20metros%2025-64%20%7C%20pickleball%20hints%20%7C%20motion%20ads&amp;utm_content=hook_a" class="label">Official Jersey <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a><a data-lp="every-season/lp/stay-cold/index.html" href="every-season/lp/stay-cold/index.html?utm_source=concept_test&amp;utm_term=Texas%20metros%2025-64%20%7C%20pickleball%20hints%20%7C%20motion%20ads&amp;utm_content=hook_a" class="label">Stay Cold <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a><a data-lp="every-season/lp/gift/index.html" href="every-season/lp/gift/index.html?utm_source=concept_test&amp;utm_term=Texas%20metros%2025-64%20%7C%20pickleball%20hints%20%7C%20motion%20ads&amp;utm_content=hook_a" class="label">Gift the Ranchers <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a></div>
+      <div class="lp-row"><h3>Try the Look</h3><a data-lp="try-the-look/lp/official-jersey/index.html" href="try-the-look/lp/official-jersey/index.html?utm_source=concept_test&amp;utm_term=Texas%20metros%2025-64%20%7C%20pickleball%20hints%20%7C%20motion%20ads&amp;utm_content=hook_a" class="label">Official Jersey <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a><a data-lp="try-the-look/lp/stay-cold/index.html" href="try-the-look/lp/stay-cold/index.html?utm_source=concept_test&amp;utm_term=Texas%20metros%2025-64%20%7C%20pickleball%20hints%20%7C%20motion%20ads&amp;utm_content=hook_a" class="label">Stay Cold <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a><a data-lp="try-the-look/lp/gift/index.html" href="try-the-look/lp/gift/index.html?utm_source=concept_test&amp;utm_term=Texas%20metros%2025-64%20%7C%20pickleball%20hints%20%7C%20motion%20ads&amp;utm_content=hook_a" class="label">Gift the Ranchers <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a></div>
+      <div class="lp-row"><h3>The Rail</h3><a data-lp="the-rail/lp/official-jersey/index.html" href="the-rail/lp/official-jersey/index.html?utm_source=concept_test&amp;utm_term=Texas%20metros%2025-64%20%7C%20pickleball%20hints%20%7C%20motion%20ads&amp;utm_content=hook_a" class="label">Official Jersey <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a><a data-lp="the-rail/lp/stay-cold/index.html" href="the-rail/lp/stay-cold/index.html?utm_source=concept_test&amp;utm_term=Texas%20metros%2025-64%20%7C%20pickleball%20hints%20%7C%20motion%20ads&amp;utm_content=hook_a" class="label">Stay Cold <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a><a data-lp="the-rail/lp/gift/index.html" href="the-rail/lp/gift/index.html?utm_source=concept_test&amp;utm_term=Texas%20metros%2025-64%20%7C%20pickleball%20hints%20%7C%20motion%20ads&amp;utm_content=hook_a" class="label">Gift the Ranchers <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a></div>
+      <div class="lp-row"><h3>Lookbook</h3><a data-lp="lookbook/lp/official-jersey/index.html" href="lookbook/lp/official-jersey/index.html?utm_source=concept_test&amp;utm_term=Texas%20metros%2025-64%20%7C%20pickleball%20hints%20%7C%20motion%20ads&amp;utm_content=hook_a" class="label">Official Jersey <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a><a data-lp="lookbook/lp/stay-cold/index.html" href="lookbook/lp/stay-cold/index.html?utm_source=concept_test&amp;utm_term=Texas%20metros%2025-64%20%7C%20pickleball%20hints%20%7C%20motion%20ads&amp;utm_content=hook_a" class="label">Stay Cold <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a><a data-lp="lookbook/lp/gift/index.html" href="lookbook/lp/gift/index.html?utm_source=concept_test&amp;utm_term=Texas%20metros%2025-64%20%7C%20pickleball%20hints%20%7C%20motion%20ads&amp;utm_content=hook_a" class="label">Gift the Ranchers <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a></div>
+      <div class="lp-row"><h3>Collections</h3><a data-lp="collections/lp/official-jersey/index.html" href="collections/lp/official-jersey/index.html?utm_source=concept_test&amp;utm_term=Texas%20metros%2025-64%20%7C%20pickleball%20hints%20%7C%20motion%20ads&amp;utm_content=hook_a" class="label">Official Jersey <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a><a data-lp="collections/lp/stay-cold/index.html" href="collections/lp/stay-cold/index.html?utm_source=concept_test&amp;utm_term=Texas%20metros%2025-64%20%7C%20pickleball%20hints%20%7C%20motion%20ads&amp;utm_content=hook_a" class="label">Stay Cold <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a><a data-lp="collections/lp/gift/index.html" href="collections/lp/gift/index.html?utm_source=concept_test&amp;utm_term=Texas%20metros%2025-64%20%7C%20pickleball%20hints%20%7C%20motion%20ads&amp;utm_content=hook_a" class="label">Gift the Ranchers <svg width="22" height="12" viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h24M19 1l6 6-6 6"/></svg></a></div>
+      </div>
     </section>
 
     <section class="notes" aria-label="How to test">
       <span class="label">How to test</span>
       <p>Hover, drag, scroll and click as you would on the live store. Product links open the real product pages on shop.ranchers.com.</p>
       <p>The bag in Try the Look is a shortlist on this page only; nothing is ordered and no payment is taken.</p>
-      <p>The Rail scales as one picture, so it reads best on a laptop or larger. The other two are built for phones too.</p>
+      <p>The ad landing pages are built for phones first, since most ad clicks come from Reels and Stories. Open them on a phone, or narrow your browser window.</p>
+      <p>The Rail scales as one picture, so it reads best on a laptop or larger. The other concepts are built for phones too.</p>
     </section>
 
     <div class="sign"><span class="callout"><span>#RideTall</span></span></div>
   </div>
 </main>
+<script>
+(function () {
+  var SETS = { pro: 'Texas metros 25-64 | pickleball hints | motion ads', ret: 'Visitors 30d + engagers 60d | US | motion ads' };
+  var HOOKS = { hook_a: ['Official Jersey.', '60+ Hours Cold.', 'Gift the Ranchers.'],
+                hook_b: ['Which color are you?', 'Texas heat.', 'Still shopping for your pickleball person?'] };
+  function val(name) { var el = document.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : null; }
+  function update() {
+    var aud = val('aud') || 'pro', hook = val('hook') || 'hook_a';
+    var q = '?utm_source=concept_test&utm_term=' + encodeURIComponent(SETS[aud]) + '&utm_content=' + hook;
+    Array.prototype.forEach.call(document.querySelectorAll('a[data-lp]'), function (a) { a.setAttribute('href', a.getAttribute('data-lp') + q); });
+    var o = document.getElementById('opens');
+    o.innerHTML = 'Pages open on: ' + HOOKS[hook].map(function (t) { return '<b>' + t + '</b>'; }).join(' &middot; ');
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.controls input'), function (i) { i.addEventListener('change', update); });
+  update();
+})();
+</script>
 </body>
 </html>
